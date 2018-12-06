@@ -15,12 +15,13 @@ public class Assign8 {
 		    	if(line.substring(0, 1).charAt(0) == 'I') { 
 		    		tree.insertStudent(new Student(line.substring(1, 8),line.substring(8, 33),line.substring(33, 37),line.substring(37, 41),line.substring(41, 42)));
 		    	}
-//		    	else if(line.substring(0, 1).charAt(0) == 'D') {
-//		    		tree.delete(new Student(line.substring(1, 8),line.substring(8, 33),line.substring(33, 37),line.substring(37, 41),line.substring(41, 42)));
-//		    	}
+		    	else if(line.substring(0, 1).charAt(0) == 'D') {
+		    		tree.delete(line.substring(8, 33).replaceAll(" ",""));
+		    	}
 		    }
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Error, unable to read file or file not found!");
+			return;
 		}
 //		Student acb = new Student(224, "Help", "ENGG", "ENSF", 3);
 //		Student bca = new Student(145, "Name", "ENGG", "ENSF", 2);
@@ -45,12 +46,15 @@ public class Assign8 {
 		//tree.inOrder();
 		//tree.preOrder();
 		//tree.delete("schafer");
-		tree.breadth(tree.getRoot(),0);
+		//tree.breadth();
 		try {
 		tree.breadthFile("breadth.txt");
+		System.out.println();
 		tree.inOrderFile("depth.txt");
 		} catch(IOException e) {
 			System.out.println("Cannot Write to file!");
+			return;
 		}
+		return;
 	}
 }

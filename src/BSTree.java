@@ -16,10 +16,14 @@ public class BSTree {
 	    }
 	    queue.clear();
 	    queue.add(root);
+	    writer.write("Number  Last Name                 Dept Prog Year");
+	    writer.newLine();
+	    System.out.println("Number  Last Name                 Dept Prog Year");
 	    while(!queue.isEmpty()){
 	        Student node = queue.remove();
 	        writer.write(node.toString());
 		    writer.newLine();
+		    System.out.println(node);
 	        if(node.getLeft() != null) queue.add(node.getLeft());
 	        if(node.getRight() != null) queue.add(node.getRight());
 	    }
@@ -38,7 +42,8 @@ public class BSTree {
 	        if(node.getRight() != null) queue.add(node.getRight());
 	    }
 	}
-	public void breadth(Student root, int a) {
+	public void breadth() {
+		Student root = this.root;
 	    if (root == null)
 	        return;
 	    queue.clear();
@@ -107,7 +112,7 @@ public class BSTree {
 	
 	public void delete(String name) {
 		if (find(name)==null) {
-			System.out.println("Student Not Found!");
+			System.out.println("Error deleting " + name+", Student Not Found!");
 			return;
 		}
 		root = deleteRec(root,name);
@@ -127,7 +132,7 @@ public class BSTree {
 			else if (root.getRight()==null)
 				return root.getLeft();
 			copy(root,minValue(root.getRight()));
-			root.setRight(deleteRec(root.getRight(),root.getLastName()));
+			root.setRight(deleteRec(root.getRight(),root.getLastName().replaceAll(" ", "")));
 		}
 		return root;
 	}
@@ -149,25 +154,6 @@ public class BSTree {
 		a.setYear(b.getYear());
 	}
 	
-//	public void delete(String name) {
-//		Student search = find(name);
-//		if (search==null) {
-//			System.out.println("Student Not Found!");
-//		}
-//		else if (search.getLeft()==null && search.getRight()==null) {
-//			if (search.getLastName().compareToIgnoreCase(search.getParent().getLastName())>0)
-//				search.getParent().setRight(null);
-//			else
-//				search.getParent().setLeft(null);
-//		}
-//		else if ((search.getLeft()==null && search.getRight()!=null) || (search.getLeft()!=null && search.getRight()==null))
-//			return;
-//		else if (search.getLeft()==null && search.getRight()!=null)
-//			search.getParent().setRight(null);//not done
-//		else
-//			return;
-//	}
-	
 	public void inOrder () {
 		inOrderTraverse (root);
 	}
@@ -185,6 +171,9 @@ public class BSTree {
 	}
 	public void inOrderFile(String fn) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fn));
+		writer.write("Number  Last Name                 Dept Prog Year");
+		System.out.println("Number  Last Name                 Dept Prog Year");
+		writer.newLine();
 		inOrderTraverseFile (root, writer);
 		writer.close();
 	}
@@ -197,6 +186,7 @@ public class BSTree {
 			inOrderTraverseFile (cursor.getLeft(), writer);
 			writer.write(cursor.toString());
 			writer.newLine();
+			System.out.println(cursor);
 			inOrderTraverseFile (cursor.getRight(), writer);
 		}
 	}

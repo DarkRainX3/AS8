@@ -1,5 +1,6 @@
 
 public class Student {
+	private int height;
 	private String number;
 	private String lastName;
 	private String dpt;
@@ -14,6 +15,7 @@ public class Student {
 		prog = program;
 		this.year = year;
 		left = right = parent = next = null;
+		height = 1;
 	}
 	public Student() {
 		number = year = null;
@@ -82,6 +84,12 @@ public class Student {
 	}
 	public void setNext(Student next) {
 		this.next = next;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
 }
