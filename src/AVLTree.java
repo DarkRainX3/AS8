@@ -2,7 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AVLTree {	//Methods taken from geeksforgeeks but adapted for student object
+public class AVLTree {
 	private Student root;
 	private Queue queue = new Queue();
 	
@@ -65,6 +65,28 @@ public class AVLTree {	//Methods taken from geeksforgeeks but adapted for studen
 	    writer.close();
 	}
 	
+	public void inOrderFile(String fn) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fn));
+		writer.write("Number  Last Name                 Dept Prog Year");
+		System.out.println("Number  Last Name                 Dept Prog Year");
+		writer.newLine();
+		inOrderTraverseFile (root, writer);
+		writer.close();
+	}
+	
+	private void inOrderTraverseFile (Student cursor, BufferedWriter writer) throws IOException {// Depth First in order will go in ascending order
+	    if (root == null) {
+	    	writer.close();
+	    }
+		if (cursor != null) {
+			inOrderTraverseFile (cursor.getLeft(), writer);
+			writer.write(cursor.toString());
+			writer.newLine();
+			System.out.println(cursor);
+			inOrderTraverseFile (cursor.getRight(), writer);
+		}
+	}
+	
 	private Student rRotate(Student s) {
 		Student x = s.getLeft();
 		Student y = x.getRight();
@@ -93,11 +115,10 @@ public class AVLTree {	//Methods taken from geeksforgeeks but adapted for studen
         return height(N.getLeft()) - height(N.getRight());
     }
 	
-	public Student insert(Student root, Student s) {
+	public Student insert(Student root, Student s) { //Methods taken from geeksforgeeks but adapted for student object
 		if (root==null) {
 			return s;
 		}
-		
 		if (s.getLastName().compareToIgnoreCase(root.getLastName())<0)
 			root.setLeft(insert(root.getLeft(), s));
 		else if (s.getLastName().compareToIgnoreCase(root.getLastName())>0)

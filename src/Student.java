@@ -6,7 +6,7 @@ public class Student {
 	private String dpt;
 	private String prog;
 	private String year;
-	private Student left, right, parent, next;
+	private Student left, right, next;
 	
 	public Student(String id, String ln, String department, String program, String year) {
 		number = id;
@@ -14,13 +14,13 @@ public class Student {
 		dpt = department;
 		prog = program;
 		this.year = year;
-		left = right = parent = next = null;
+		left = right  = next = null;
 		height = 1;
 	}
 	public Student() {
 		number = year = null;
 		lastName = dpt = prog = null;
-		left = right = parent = next = null;
+		left = right = next = null;
 	}
 	@Override
 	public String toString() {
@@ -73,12 +73,7 @@ public class Student {
 	public void setRight(Student right) {
 		this.right = right;
 	}
-	public Student getParent() {
-		return parent;
-	}
-	public void setParent(Student parent) {
-		this.parent = parent;
-	}
+
 	public Student getNext() {
 		return next;
 	}

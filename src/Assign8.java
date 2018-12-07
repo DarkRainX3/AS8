@@ -4,12 +4,12 @@ import java.io.IOException;
 
 public class Assign8 {
 	public static void main(String [] args) {
-//		if (args.length!=3) {
-//			System.out.println("Invalid Number of Arguments");
-//			System.exit(0);
-//		}
+		if (args.length!=3) {
+			System.out.println("Invalid Number of Arguments");
+			System.exit(0);
+		}
 		BSTree tree = new BSTree();
-		try (BufferedReader br = new BufferedReader(new FileReader("a3input1.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	if(line.substring(0, 1).charAt(0) == 'I') { 
@@ -18,6 +18,8 @@ public class Assign8 {
 		    	else if(line.substring(0, 1).charAt(0) == 'D') {
 		    		tree.delete(line.substring(8, 33).replaceAll(" ",""));
 		    	}
+		    	else
+		    		System.out.println("Invalid operation code");
 		    }
 		} catch (IOException e) {
 			System.out.println("Error, unable to read file or file not found!");
@@ -48,9 +50,9 @@ public class Assign8 {
 		//tree.delete("schafer");
 		//tree.breadth();
 		try {
-		tree.breadthFile("breadth.txt");
+		tree.breadthFile(args[2]);
 		System.out.println();
-		tree.inOrderFile("depth.txt");
+		tree.inOrderFile(args[1]);
 		} catch(IOException e) {
 			System.out.println("Cannot Write to file!");
 			return;

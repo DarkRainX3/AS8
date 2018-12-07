@@ -4,13 +4,12 @@ import java.io.IOException;
 
 public class Assign8b {
 	public static void main(String [] args) {
-//		if (args.length!=1) {
-//			System.out.println("Invalid Number of Arguments");
-//			System.exit(0);
-//		}
-//		String fileName = args[0];
+		if (args.length!=3) {
+			System.out.println("Invalid Number of Arguments");
+			System.exit(0);
+		}
 		AVLTree tree = new AVLTree();
-		try (BufferedReader br = new BufferedReader(new FileReader("a3input1.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	if(line.substring(0, 1).charAt(0) == 'I') {
@@ -24,6 +23,14 @@ public class Assign8b {
 			System.out.println("Error, unable to read file or file not found!");
 			return;
 		}
-		tree.breadth();
+		try {
+			tree.breadthFile(args[2]);
+			System.out.println();
+			tree.inOrderFile(args[1]);
+		} catch(IOException e) {
+			System.out.println("Cannot Write to file!");
+			return;
+		}
+		return;
 	}
 }

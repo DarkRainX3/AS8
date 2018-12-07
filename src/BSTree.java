@@ -77,7 +77,6 @@ public class BSTree {
 				if (newStudent.getLastName().compareToIgnoreCase(cursor.getLastName()) < 0) {
 					cursor = cursor.getLeft();
 					if (cursor == null) {
-						newStudent.setParent(parent);
 						parent.setLeft(newStudent);
 						return;
 					}
@@ -85,7 +84,6 @@ public class BSTree {
 				else if (newStudent.getLastName().compareToIgnoreCase(cursor.getLastName()) > 0) {
 					cursor = cursor.getRight();
 					if (cursor == null) {
-						newStudent.setParent(parent);
 						parent.setRight(newStudent);
 						return;
 					}
